@@ -14,6 +14,7 @@ void testApp::setup(){
 
   grayImage.allocate(kinect.width, kinect.height);
 
+  warpedImage.allocate(kinect.width, kinect.height);
 
   frontPanelGradient.allocate(kinect.width, kinect.height);
   backPanelGradient.allocate(kinect.width, kinect.height);
@@ -27,6 +28,27 @@ void testApp::setup(){
   kinectFbo.allocate(kinect.width, kinect.height, GL_RGBA);
   doFbo = true;
   erodeNtimes = 2;
+
+  if( XML.loadFile("/home/ekko/Desktop/corners.xml") ){
+              cout<<"XML loaded"<<endl;
+      }else{
+              cout<<"unable to load XML"<<endl;
+    }
+
+
+  //warpStuff
+  srcPositions  = new ofPoint[4];
+    srcPositions[0].set(XML.getValue("SRC:X1", 0), XML.getValue("SRC:Y1", 0), 0);
+    srcPositions[1].set(XML.getValue("SRC:X2", kinect.width), XML.getValue("SRC:Y2", 0), 0);
+    srcPositions[2].set(XML.getValue("SRC:X3", kinect.width), XML.getValue("SRC:Y3", kinect.height), 0);
+    srcPositions[3].set(XML.getValue("SRC:X4", 0), XML.getValue("SRC:Y4", kinect.height), 0);
+
+    dstPositions  = new ofPoint[4];
+    dstPositions[0].set(0, 0, 0);
+    dstPositions[1].set(kinect.width, 0, 0);
+    dstPositions[2].set(kinect.width, kinect.height, 0);
+    dstPositions[3].set(0, kinect.height, 0);
+
 }
 
 void testApp::isPixelBetweenPanels(ofxCvGrayscaleImage & gray, ofxCvGrayscaleImage & frontGradient, ofxCvGrayscaleImage & backGradient){
@@ -66,8 +88,10 @@ void testApp::update(){
           grayImage.erode_3x3();
         }
 
+        warpedImage.warpIntoMe(grayImage, srcPositions, dstPositions);
+
         kinectFbo.begin();
-          grayImage.draw(0, 0);
+          warpedImage.draw(0, 0);
           //shapeFinder.draw(0, 0);
         kinectFbo.end();
       }

@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxKinect.h"
 #include "ofxOpenCv.h"
+#include "ofxXmlSettings.h"
 
 
 class testApp : public ofBaseApp{
@@ -27,7 +28,7 @@ class testApp : public ofBaseApp{
 		bool doFbo;
 		int erodeNtimes;
 
-    ofxCvGrayscaleImage grayImage, frontPanelGradient, backPanelGradient;
+    ofxCvGrayscaleImage grayImage, frontPanelGradient, backPanelGradient, warpedImage;
 
 		ofImage loadedFrontPanel, loadedBackPanel;
 
@@ -35,4 +36,9 @@ class testApp : public ofBaseApp{
 
     ofFbo kinectFbo;
 
+    //warp stuff
+    ofPoint *				srcPositions;
+    ofPoint *				dstPositions;
+
+    ofxXmlSettings XML;
 };

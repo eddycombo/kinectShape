@@ -367,7 +367,9 @@ obj/linux/Debug/src/main.o: src/main.cpp \
  ../../../addons/ofxOpenCv/src/ofxCvFloatImage.h \
  ../../../addons/ofxOpenCv/src/ofxCvShortImage.h \
  ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h \
- ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h
+ ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h \
+ ../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
+ ../../../addons/ofxXmlSettings/libs/tinyxml.h
 
 ../../../libs/openFrameworks/ofMain.h:
 
@@ -1140,3 +1142,7 @@ src/testApp.h:
 ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h:
 
 ../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h:
+
+../../../addons/ofxXmlSettings/src/ofxXmlSettings.h:
+
+../../../addons/ofxXmlSettings/libs/tinyxml.h:
